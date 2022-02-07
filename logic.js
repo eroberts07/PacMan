@@ -18,15 +18,21 @@ var world = [
 ]
 
 function display_world(){
-    output=[]
+    output=''
+    x = document.getElementById("brick")
+    y = document.getElementById("space")
     for(i=0; i < world.length; i++){
+        output += "\n<div class='row'></div>";
         for(j=0; j < world[i].length; j++){
             if (world[i][j] == 1)
-                world[i][j] = document.getElementById("brick")
+                output += "\n\t<div class='brick'></div>";
             else if (world[i][j] == 2)
-                world[i][j] = document.getElementById("space")
+                output += "\n\t<div class='space'></div>";
         }
-        output.push(world[i][j])
+        output += "\n</div>"
+        document.getElementById('world').innerHTML = output
     }
     console.log(output)
 }
+
+display_world();
