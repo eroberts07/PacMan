@@ -16,3 +16,17 @@ var world = [
     [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
+
+function display_world(){
+    output=[]
+    for(i=0; i < world.length; i++){
+        for(j=0; j < world[i].length; j++){
+            if (world[i][j] == 1)
+                world[i][j] = document.getElementById("brick")
+            else if (world[i][j] == 2)
+                world[i][j] = document.getElementById("space")
+        }
+        output.push(world[i][j])
+    }
+    console.log(output)
+}
