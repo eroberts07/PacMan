@@ -28,6 +28,7 @@ var ghost1 = {
     x: 7,
     y: 7,
 }
+
 var up =  document.getElementById('ghost1').style.top = ghost1.y-30 + "px";
 var down = document.getElementById('ghost1').style.top = ghost1.y+30 + "px";
 var left = document.getElementById('ghost1').style.left = ghost1.x-30 + "px";
@@ -92,26 +93,53 @@ display_world();
 display_pacman();
 display_ghost1();
 display_score();
-chase_player();
+//chase_player();
+collision_detection();
 
+function getOffset(){
+    const NewWall = el
+    return {
+        left: NewWall.left + Window.scrollX,
+        top: NewWall.top + Window.scrollY
+    };
+}
 
 function collision_detection(){
+    var rowNumber = 0;
+    var indexNumber = 0;
+    var walls = [];
     for(i=0; i < world.length; i++){
+        rowNumber ++;
         for(j=0; j < world[i].length; j++){
-        if (world[i][j] ==1){
-            var wall = world[i][j];
-            
+            indexNumber ++
+            if (indexNumber > 17){
+                var indexNumber = 1;
+            }
+            if (world[i][j] ==1){
+                var wall = world[i][j];
+                var wall = {
+                    y: rowNumber, 
+                    x: indexNumber,
+                    // w: 30 ,
+                    // h: 30
+                }
+            walls.push(wall);
+            //console.log(wall);
         }
-        if (pacman.x < wall.x + wall.w &&
-            pacman.x + pacman.w > wall.x &&
-            pacman.y < wall.y + wall.h &&
-            pacman.h + pacman.y > wall.y) {
+    }
+    }
+    //console.log(walls)
+        for(i=0; i < walls.length; i++){
+        if (pacman.y - 1 < walls[i].x &&
+            pacman.y < walls[i].x &&
+            pacman.x < walls[i].x &&
+            pacman.x > walls[i].y
+            ){
             console.log("Collision Detected!")
                 return false;
     } else {
         return true;
     }
-}
 }
 }
 function wonder(){
@@ -131,9 +159,7 @@ function AILoop(){
     wonder();
     display_ghost1();
 }
-function playerLoop(){
-    
-}
+
 
 setInterval(AILoop, 1000);
 
@@ -171,7 +197,5 @@ display_world();
 display_score();
 display_pacman();
 }
-
-
 
 
