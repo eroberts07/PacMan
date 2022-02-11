@@ -96,10 +96,24 @@ chase_player();
 
 
 function collision_detection(){
-    // for(var i=0; i<world[i].length, i++){
-    //     if( Math.abs())
+    for(i=0; i < world.length; i++){
+        for(j=0; j < world[i].length; j++){
+        if (world[i][j] ==1){
+            var wall = world[i][j];
+            
+        }
+        if (pacman.x < wall.x + wall.w &&
+            pacman.x + pacman.w > wall.x &&
+            pacman.y < wall.y + wall.h &&
+            pacman.h + pacman.y > wall.y) {
+            console.log("Collision Detected!")
+                return false;
+    } else {
+        return true;
     }
-    
+}
+}
+}
 function wonder(){
     ghost1.x ++
     if([ghost1.x + 1][ghost1.y] == 1){
@@ -117,23 +131,26 @@ function AILoop(){
     wonder();
     display_ghost1();
 }
+function playerLoop(){
+    
+}
 
 setInterval(AILoop, 1000);
 
 document.onkeydown = function(k){
-    if(k.key == 'ArrowDown' && [pacman.x + 1][pacman.y] != 1){
+    if(k.key == 'ArrowDown' && collision_detection() == true){
         pacman.x ++ ;
         document.getElementById("pacman").style.transform = "rotate(90deg)"
     }
-    else if(k.key == 'ArrowUp' && [pacman.x - 1][pacman.y] != 1){
+    else if(k.key == 'ArrowUp' && collision_detection() == true){
         pacman.x --;
         document.getElementById("pacman").style.transform = "rotate(270deg)"
     }
-    else if(k.key == 'ArrowRight' && [pacman.x][pacman.y + 1 ] != 1){
+    else if(k.key == 'ArrowRight' && collision_detection() == true){
         pacman.y ++;
         document.getElementById("pacman").style.transform = "rotate(0deg)"
     }
-    else if(k.key == 'ArrowLeft' && [pacman.y - 1][pacman.x] != 1){
+    else if(k.key == 'ArrowLeft' && collision_detection() == true){
         pacman.y --; 
         document.getElementById("pacman").style.transform = "rotate(180deg)"
     }

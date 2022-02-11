@@ -97,6 +97,7 @@ blockquote, q {
     margin: auto;
     margin-top: 13px;
     background-color: yellow;
+    border-radius: 2px;
 }
 
 #pacman {
