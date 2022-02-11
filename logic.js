@@ -7,7 +7,7 @@ var world = [
     [1,2,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1,2,1],
     [1,2,1,2,1,2,1,1,1,1,1,1,1,2,1,2,1,2,1],
     [1,2,1,2,1,2,1,3,3,3,3,3,1,2,1,2,1,2,1],
-    [4,2,0,2,1,2,1,3,3,3,3,3,1,2,1,2,0,2,5],
+    [4,2,0,2,1,2,3,3,3,3,3,3,3,2,1,2,0,2,5],
     [1,2,1,2,1,2,1,3,3,3,3,3,1,2,1,2,1,2,1],
     [1,2,1,2,1,2,1,1,1,1,1,1,1,2,1,2,1,2,1],
     [1,2,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1,2,1],
@@ -23,6 +23,20 @@ var pacman = {
     y: 1,
     x: 1
 }
+
+var ghost1 = {
+    x: 7,
+    y: 7,
+}
+var up =  document.getElementById('ghost1').style.top = ghost1.y-30 + "px";
+var down = document.getElementById('ghost1').style.top = ghost1.y+30 + "px";
+var left = document.getElementById('ghost1').style.left = ghost1.x-30 + "px";
+var right = document.getElementById('ghost1').style.left = ghost1.x+30 + "px";
+var paths = [
+    up, down, left, right
+]
+
+
 
 
 
@@ -56,6 +70,11 @@ function display_pacman(){
     document.getElementById("pacman").style.top = pacman.x*30 + "px";
 }
 
+function display_ghost1(){
+    document.getElementById("ghost1").style.left = ghost1.x*30 + "px";
+    document.getElementById("ghost1").style.top = ghost1.y*30 + "px";
+}
+
 
 
 function display_score(){
@@ -71,22 +90,46 @@ function move_player(){
 
 display_world();
 display_pacman();
+display_ghost1();
 display_score();
+chase_player();
+
 
 function collision_detection(){
+    // for(var i=0; i<world[i].length, i++){
+    //     if( Math.abs())
+    }
     
+function wonder(){
+    ghost1.x ++
+    if([ghost1.x + 1][ghost1.y] == 1){
+        Math.floor(Math.random(paths.length));
+        console.log("ghost detected wall")
+    }
+}
+function chase_player(){
+    while([ghost1.x][ghost1.y] != [pacman.x][pacman.y])
+    ghost1.x ++;
+    console.log("function ran")
 }
 
+function AILoop(){
+    wonder();
+    display_ghost1();
+}
+
+setInterval(AILoop, 1000);
+
 document.onkeydown = function(k){
-    if(k.key == 'ArrowDown' && [pacman.y][pacman.x + 1] != 1){
-        pacman.x ++;
+    if(k.key == 'ArrowDown' && [pacman.x + 1][pacman.y] != 1){
+        pacman.x ++ ;
         document.getElementById("pacman").style.transform = "rotate(90deg)"
     }
-    else if(k.key == 'ArrowUp' && [pacman.y][pacman.x - 1] != 1){
+    else if(k.key == 'ArrowUp' && [pacman.x - 1][pacman.y] != 1){
         pacman.x --;
         document.getElementById("pacman").style.transform = "rotate(270deg)"
     }
-    else if(k.key == 'ArrowRight' && [pacman.y + 1][pacman.x] != 1){
+    else if(k.key == 'ArrowRight' && [pacman.x][pacman.y + 1 ] != 1){
         pacman.y ++;
         document.getElementById("pacman").style.transform = "rotate(0deg)"
     }

@@ -47,6 +47,7 @@ blockquote, q {
 }
 .container {
     margin: auto;
+    margin-top: 200px;
     width: 700px;
     position: relative;
     overflow:hidden;
@@ -105,6 +106,14 @@ blockquote, q {
     background-size: cover;
     width: 30px;
     height: 30px;
+    position: absolute;
+}
+
+#ghost1 {
+    background: url('pacman-sprites.gif');
+    background-position: -108px -42px;
+    width: 32px;
+    height: 32px;
     position: absolute;
 }
 
